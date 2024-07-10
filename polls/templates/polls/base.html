@@ -27,10 +27,17 @@
           <img width="50" src="{% static 'old_favicon.png' %}" alt="The Poll World logo" />
           <span class="ms-1">Poll World</span>
         </a>
-        <span class="navbar-brand">Amazing test text</span>
+        <a class="navbar-brand" href="/about">
+          <span class="ms-1">About</span>
+        </a>
       </div>
     </nav>
-    <main class="p-4">{% block content %}{% endblock %}</main>
+    <main class="p-4">
+      {% block content %}{% endblock %}
+      {% if '/' != request.get_full_path %}
+      {% include "polls/home.html" %}
+      {% endif %}
+    </main>
     <footer class="d-flex justify-content-center navbar-dark bg-dark p-2">
       <div class="my-auto">
         <span class="navbar-brand">Made with love by the amazing team at Poll World</span>
