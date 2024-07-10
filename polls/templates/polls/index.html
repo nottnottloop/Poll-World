@@ -4,7 +4,7 @@
 {% block content %}
 
 {% if latest_question_list %}
-	<h2>Polls sorted by recent activity:</h2>
+	<h1>Polls sorted by recent activity:</h1>
     <ul>
     {% for question in latest_question_list %}
         <li><a href="{% url 'polls:detail' question.id %}">{{question.id}}: {{ question.question_text }}</a></li>
