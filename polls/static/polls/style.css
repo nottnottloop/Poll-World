@@ -50,15 +50,14 @@ main {
         color: #66f
     }
 }
+
 .pie {
     width: 300px;
-    background: #f06;
+    background: blue;
     border-radius: 50%;
   }
   
   .pie circle {
     fill: none;
-    stroke: gold;
     stroke-width: 32;
-    animation: rotate 1.5s ease-in;
-  }
+}

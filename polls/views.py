@@ -1,4 +1,5 @@
-from django.db.models import F
+from typing import Any
+from django.db.models import F, Sum
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
@@ -35,6 +36,24 @@ class ResultsView(generic.DetailView):
 
 class ResultsInfoView(generic.DetailView):
     model = Question
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        colors = ["blue", "green", "orange", "cornflowerblue", "red", "violet"]
+        choices = context['question'].choice_set.all()
+        total_votes = choices.aggregate(Sum("votes", default=0))['votes__sum']
+        choices = context['question'].choice_set.all().values()
+        context['choices'] = choices
+        pie_information = []
+        accumulator = 0
+        for i in range(len(choices)):
+            context['choices'][i]['color'] = colors[i]
+            percent = (choices[i]['votes'] / total_votes) * 100
+            pie_information.append({"color": colors[i], "dasharray_value": percent, "dashoffset_value": accumulator})
+            accumulator += percent
+        context['pie_information'] = pie_information
+        return context
+
     template_name = "polls/snippets/results_info.html"
 
 class ThanksView(generic.TemplateView):
