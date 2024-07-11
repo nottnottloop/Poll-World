@@ -25,6 +25,10 @@ main {
     animation: colorShift 2.5s linear 0s infinite;
 }
 
+.no-underline {
+    text-decoration: none;
+}
+
 @keyframes colorShift {
     0% {
         color: #66f
