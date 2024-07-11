@@ -1,5 +1,3 @@
-{% extends "polls/base.html" %}
-{% block content %}
 <form id="vote-form">
     {% csrf_token %}
     <div id="vote-form-div" class="container-sm d-flex flex-column col-6">
@@ -9,7 +7,7 @@
             {% for choice in question.choice_set.all %}
                 <br>
                 <div class="d-flex gap-2">
-                    <input class="form-check-input" type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+                    <input class="form-check-input" type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" checked>
                     <label class="form-label" for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
                 </div>
             {% endfor %}
@@ -17,12 +15,3 @@
     <input id="vote-button" hx-post="/{{question.id}}/vote/" hx-include="#vote-form" hx-target="#vote-form-div" hx-on:click="htmx.addClass('#results-button', 'hidden'); htmx.removeClass('#vote-again-button', 'hidden')" class="trigger_results btn btn-success btn-inline mx-auto px-4 mt-3" type="submit" value="Vote">
     </div>
 </form>
-
-<div class="container-sm d-flex flex-column col-4 mb-4">
-    <input id="vote-again-button" class="hidden btn btn-success btn-inline mx-auto px-4 mt-3" onClick="window.location.reload();" value="Vote again">
-    <button id="results-button" hx-get="/{{question.id}}/results_info" hx-target="#results-container" hx-trigger="click from:.trigger_results delay:0.01s" hx-on:click="htmx.addClass('#results-button', 'hidden')" class="trigger_results btn btn-primary btn-inline mx-auto px-4 mt-3 mx-auto">See Results</button>
-</div>
-<div class="container-sm d-flex flex-column col-6">
-    <div id="results-container"></div>
-</div>
-{% endblock %}

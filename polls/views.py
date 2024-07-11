@@ -27,7 +27,7 @@ class AboutView(generic.TemplateView):
 
 class DetailView(generic.DetailView):
     model = Question
-    template_name = "polls/detail.html"
+    template_name = "polls/vote_page.html"
     def get_queryset(self):
         """
         Excludes any questions that aren't published yet.
@@ -54,7 +54,7 @@ def vote(request, question_id):
         # Redisplay the question voting form.
         return render(
             request,
-            "polls/detail.html",
+            "polls/vote_form.html",
             {
                 "question": question,
                 "error_message": "You didn't select a choice.",

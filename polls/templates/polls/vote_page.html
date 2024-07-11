@@ -1,0 +1,11 @@
+{% extends "polls/base.html" %}
+{% block content %}
+{% include "polls/vote_form.html" %}
+<div class="container-sm d-flex flex-column col-4 mb-4">
+    <input id="vote-again-button" class="hidden btn btn-success btn-inline mx-auto px-4 mt-3" onClick="window.location.reload();" value="Vote again">
+    <button id="results-button" hx-get="/{{question.id}}/results_info" hx-target="#results-container" hx-trigger="click from:.trigger_results delay:0.01s" hx-on:click="htmx.addClass('#results-button', 'hidden')" class="trigger_results btn btn-primary btn-inline mx-auto px-4 mt-3 mx-auto">See Results</button>
+</div>
+<div class="container-sm d-flex flex-column col-6">
+    <div id="results-container"></div>
+</div>
+{% endblock %}
