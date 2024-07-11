@@ -13,13 +13,7 @@ class IndexView(generic.ListView):
     context_object_name = "latest_question_list"
 
     def get_queryset(self):
-        """
-        Return the last five published questions (not including those set to be
-        published in the future).
-        """
-        return Question.objects.filter(pub_date__lte=timezone.now()).order_by("-pub_date")[
-            :5
-        ]
+        return Question.objects.all().order_by("-last_activity")
 
 
 class AboutView(generic.TemplateView):
@@ -63,7 +57,6 @@ def vote(request, question_id):
     else:
         selected_choice.votes = F("votes") + 1
         selected_choice.save()
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
+        question.last_activity = timezone.now()
+        question.save()
         return render(request, "polls/thanks_for_voting.html", {"question": question})

@@ -9,13 +9,13 @@ class ChoiceInline(admin.TabularInline):
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ["question_text", "pub_date", "was_published_recently"]
+    list_display = ["question_text", "pub_date", "was_published_recently", "last_activity"]
     fieldsets = [
         (None, {"fields": ["question_text"]}),
-        ("Date information", {"fields": ["pub_date"], "classes": ["collapse"]}),
+        ("Date information", {"fields": ["pub_date", "last_activity"]}),
     ]
     inlines = [ChoiceInline]
-    list_filter = ["pub_date"]
+    list_filter = ["pub_date", "last_activity"]
     search_fields = ["question_text"]
 
 

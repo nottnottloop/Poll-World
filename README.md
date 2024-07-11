@@ -11,3 +11,5 @@ After optionally creating a virtual environment, run `pip install -r requirement
 
 ## Details
 The database is committed with this repo so somebody cloning it doesn't have to burden themselves with making some dummy questions/choices to try out the application.
+
+The `admin` account has the password `asdfasdf`.
