@@ -12,3 +12,37 @@ body {
 a {
 	color: green;
 }
+
+main {
+	background-color: whitesmoke;
+}
+
+.hidden {
+    display: none;
+}
+
+.rainbow {
+    animation: colorShift 2.5s linear 0s infinite;
+}
+
+@keyframes colorShift {
+    0% {
+        color: #66f
+    }
+
+    10% {
+        color: #09f
+    }
+
+    50% {
+        color: #0f0
+    }
+
+    75% {
+        color: #f39
+    }
+
+    to {
+        color: #66f
+    }
+}

@@ -37,7 +37,14 @@ class DetailView(generic.DetailView):
 
 class ResultsView(generic.DetailView):
     model = Question
-    template_name = "polls/results.html"
+    template_name = "polls/results_page.html"
+
+class ResultsInfoView(generic.DetailView):
+    model = Question
+    template_name = "polls/results_info.html"
+
+class ThanksView(generic.TemplateView):
+    template_name = "polls/thanks_for_voting.html"
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
@@ -59,4 +66,4 @@ def vote(request, question_id):
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
-        return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
+        return render(request, "polls/thanks_for_voting.html")

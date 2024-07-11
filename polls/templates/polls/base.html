@@ -16,6 +16,7 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <script defer src="https://unpkg.com/htmx.org@1.9.12/dist/htmx.min.js" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
     <link rel="icon" href="{% static 'favicon.png' %}" />
     <link rel="stylesheet" href="{% static 'polls/style.css' %}" />
     <title>{% block title %}Poll World{% endblock %}</title>
@@ -33,14 +34,14 @@
       </div>
     </nav>
     <main class="p-4">
-      {% block content %}{% endblock %}
       {% if '/' != request.get_full_path %}
       {% include "polls/home.html" %}
       {% endif %}
+      {% block content %}{% endblock %}
     </main>
     <footer class="d-flex justify-content-center navbar-dark bg-dark p-2">
       <div class="my-auto">
-        <span class="navbar-brand">Made with love by the amazing team at Poll World</span>
+        <span class="navbar-brand">🗳️ Made with love by the amazing team at Poll World 🗳️</span>
       </div>
     </footer>
   </body>
