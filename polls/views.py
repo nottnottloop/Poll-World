@@ -66,4 +66,4 @@ def vote(request, question_id):
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
-        return render(request, "polls/thanks_for_voting.html")
+        return render(request, "polls/thanks_for_voting.html", {"question": question})
