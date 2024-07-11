@@ -1,19 +1,16 @@
 <form id="vote-form">
     {% csrf_token %}
-    <div id="vote-form-div" class="container-sm d-flex flex-column col-6">
-        <fieldset>
+        	<fieldset>
             <legend><h1>{{question.id}}: <span class="rainbow">{{ question.question_text }}</h1></legend>
             {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
             {% for choice in question.choice_set.all %}
-                <br>
-                <div class="d-flex gap-2">
+                <div class="d-flex-inline gap-2">
                     <input class="form-check-input" type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
                     <label class="form-label" for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
                 </div>
+                </fieldset>
             {% endfor %}
-        </fieldset>
     <input id="vote-button" hx-post="/{{question.id}}/vote/" hx-include="#vote-form" hx-target="#vote-form-container" class="trigger_results btn btn-success btn-inline mx-auto px-4 mt-3" type="submit" value="Vote">
-    </div>
 </form>
 
 {% include "polls/snippets/results_area.html" %}
