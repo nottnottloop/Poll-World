@@ -1,6 +1,6 @@
-{% extends "polls/base.html" %}
+{% extends "polls/pages/base.html" %}
 {% block content %}
 <h1>{{ question.question_text }}</h1>
-{% include "polls/results_info.html" %}
+{% include "polls/snippets/results_info.html" %}
 <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
 {% endblock %}

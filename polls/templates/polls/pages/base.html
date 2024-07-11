@@ -35,7 +35,7 @@
     </nav>
     <main class="p-4">
       {% if '/' != request.get_full_path %}
-      {% include "polls/home.html" %}
+      {% include "polls/snippets/home.html" %}
       {% endif %}
       {% block content %}{% endblock %}
     </main>
