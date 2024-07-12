@@ -20,6 +20,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     #"debug_toolbar",
+    'rest_framework',
+    'django_filters',
     "polls.apps.PollsConfig",
     'django.contrib.admin',
     'django.contrib.auth',
