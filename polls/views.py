@@ -7,6 +7,7 @@ from django.views import generic
 from django.utils import timezone
 
 from .models import Choice, Question
+from .forms import QuestionForm
 
 
 class IndexView(generic.ListView):
@@ -29,6 +30,11 @@ class DetailView(generic.DetailView):
         """
         return Question.objects.filter(pub_date__lte=timezone.now())
 
+class BookCreateView(generic.CreateView):
+    template_name = "polls/pages/django_select_form.html"
+    model = Question
+    form_class = QuestionForm
+    success_url = "/"
 
 class ResultsView(generic.DetailView):
     model = Question

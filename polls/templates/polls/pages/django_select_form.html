@@ -3,10 +3,16 @@
 
 {% block content %}
 
+<style>
+    input, select {width: 100%}
+</style>
+
 <form method="POST">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit">
 </form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 {% endblock %}
