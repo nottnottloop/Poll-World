@@ -1,5 +1,5 @@
-<div class="choice-div" choice="{{choice.id}}" class="row mt-3">
+<div class="row mt-3 choice-div" choice="{{choice.id}}">
 	<label class="col-md-3" for="{{choice.id}}">Votes: {{choice.votes}}</label>
 	<input class="col-md-6" type="text" id="{{choice.id}}" name="{{choice.id}}" value="{{choice.choice_text}}"></input>
-	<button hx-post="{% url 'polls:delete_choice' %}" hx-vals='{"choice_id": "{{choice.id}}"}' hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' class="col-md-2 btn btn-danger mx-auto d-block" hx-target=".choice-div[choice='{{choice.id}}']" hx-swap="outerHTML">Delete</button>
+	<button hx-post="{% url 'polls:delete_choice' %}" hx-vals='{"choice_id": "{{choice.id}}"}' hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' class="ms-3 col-md-1 btn btn-danger" hx-target=".choice-div[choice='{{choice.id}}']" hx-swap="outerHTML">Delete</button>
 </div>
