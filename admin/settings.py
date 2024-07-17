@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     #"debug_toolbar",
     'rest_framework',
     'django_filters',
+    'django_select2',
     "polls.apps.PollsConfig",
     'django.contrib.admin',
     'django.contrib.auth',

@@ -1,0 +1,13 @@
+<div class="container">
+    <form id="choices_form" method="POST" action="{% url 'polls:choices_form' %}">
+        {% csrf_token %}
+        <input class="d-none" value={{question_id}} name="question_id"></input>
+        {% for choice in choice_list %}
+        {% include "polls/snippets/choice_input.html" %}
+        {% endfor %}
+        <div id="choice_form_buttons" class="d-flex">
+            <input hx-post="{% url 'polls:new_choice' %}" hx-swap="beforebegin" hx-target="#choice_form_buttons" class="btn btn-primary mx-auto d-block mt-3" type="button" value="Create Choice"></input>
+            <input class="btn btn-success mx-auto d-block mt-3" type="submit"></input>
+        </div>
+    </form>
+</div>

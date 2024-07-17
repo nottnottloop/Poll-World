@@ -6,6 +6,7 @@ from .models import Question, Choice
 class ChoiceInline(admin.TabularInline):
     model = Choice
     extra = 3
+    autocomplete_fields = ['question']
 
 
 class QuestionAdmin(admin.ModelAdmin):

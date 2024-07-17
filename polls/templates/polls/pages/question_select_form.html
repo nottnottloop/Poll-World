@@ -1,0 +1,24 @@
+{% extends "polls/pages/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<form id="question_form" hx-get="{% url 'polls:choices_form' %}" hx-trigger="load_choices" hx-target="#choices_form_wrapper">
+    {% csrf_token %}
+    {{ form.as_p }}
+</form>
+
+<div id="choices_form_wrapper">
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{{ form.media.css }}
+{{ form.media.js }}
+
+<script>
+$('#id_question_text').on('change', () => {
+    htmx.trigger("#question_form", "load_choices")
+})
+</script>
+
+{% endblock %}

@@ -61,3 +61,7 @@ main {
     fill: none;
     stroke-width: 32;
 }
+
+.django-select2 {
+    width: 100%;
+}

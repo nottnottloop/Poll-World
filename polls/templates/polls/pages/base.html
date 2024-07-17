@@ -28,12 +28,13 @@
           <img width="50" src="{% static 'old_favicon.png' %}" alt="The Poll World logo" />
           <span class="ms-1">Poll World</span>
         </a>
+        {% comment %} Not responsive links {% endcomment %}
         <a class="navbar-brand" href="/about">
           <span class="ms-1">About</span>
         </a>
-        {% comment %}<a class="navbar-brand" href="/dropdown_zone">
-          <span class="ms-1">Dropdown Zone</span>
-        </a>{% endcomment %}
+        <a class="navbar-brand" href="/new_question">
+          <span class="ms-1">Modify Questions</span>
+        </a>
       </div>
     </nav>
     <main class="p-4">

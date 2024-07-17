@@ -1,7 +1,7 @@
 from typing import Any
 from django.db.models import F, Sum
-from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponseGone, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
@@ -30,11 +30,41 @@ class DetailView(generic.DetailView):
         """
         return Question.objects.filter(pub_date__lte=timezone.now())
 
-class BookCreateView(generic.CreateView):
-    template_name = "polls/pages/django_select_form.html"
+class CreateOrModifyQuestionView(generic.CreateView):
+    template_name = "polls/pages/question_select_form.html"
     model = Question
     form_class = QuestionForm
     success_url = "/"
+
+def ChoicesFormView(request):
+    if request.GET:
+        # not a great key name from the form currently
+        question_id = request.GET['question_text']
+        choice_list = Choice.objects.filter(question__pk=question_id)
+        context = {
+            "question_id": question_id,
+            "choice_list": choice_list
+        }
+        return render(request, "polls/snippets/choices_form.html", context)
+    elif request.POST:
+        choice_ids = [x for x in list(request.POST) if x.isnumeric()]
+        for id in choice_ids:
+            choice_to_update = Choice.objects.get(pk=int(id))
+            choice_to_update.choice_text = request.POST[id]
+            choice_to_update.save()
+        return redirect(reverse("polls:new_question"))
+
+def NewChoice(request):
+    question = Question.objects.get(pk=request.POST["question_id"])
+    new_choice = Choice.objects.create(question=question)
+    context = {
+        "choice": new_choice
+    }
+    return render(request, "polls/snippets/choice_input.html", context)
+
+def DeleteChoice(request):
+    Choice.objects.get(id=id).delete()
+    return 
 
 class ResultsView(generic.DetailView):
     model = Question
