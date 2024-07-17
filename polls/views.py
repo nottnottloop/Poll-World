@@ -55,7 +55,6 @@ def ChoicesFormView(request):
         return redirect(reverse("polls:new_question"))
 
 def NewChoice(request):
-    print(f"Body: {list(request.POST)}")
     question = Question.objects.get(pk=request.POST["question_id"])
     new_choice = Choice.objects.create(question=question)
     context = {
