@@ -7,7 +7,7 @@
         {% endfor %}
         <div id="choice_form_buttons" class="d-flex">
             <input hx-post="{% url 'polls:new_choice' %}" hx-swap="beforebegin" hx-target="#choice_form_buttons" class="btn btn-primary mx-auto d-block mt-3" type="button" value="Create Choice"></input>
-            <input class="btn btn-success mx-auto d-block mt-3" type="submit"></input>
+            <button class="btn btn-success mx-auto d-block mt-3" type="submit">Save</button>
         </div>
     </form>
 </div>

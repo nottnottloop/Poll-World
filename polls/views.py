@@ -1,6 +1,6 @@
 from typing import Any
 from django.db.models import F, Sum
-from django.http import HttpResponseGone, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseGone, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from django.views import generic
@@ -37,7 +37,7 @@ class CreateOrModifyQuestionView(generic.CreateView):
     success_url = "/"
 
 def ChoicesFormView(request):
-    if request.GET:
+    if request.method == "GET":
         # not a great key name from the form currently
         question_id = request.GET['question_text']
         choice_list = Choice.objects.filter(question__pk=question_id)
@@ -46,7 +46,7 @@ def ChoicesFormView(request):
             "choice_list": choice_list
         }
         return render(request, "polls/snippets/choices_form.html", context)
-    elif request.POST:
+    elif request.method == "POST":
         choice_ids = [x for x in list(request.POST) if x.isnumeric()]
         for id in choice_ids:
             choice_to_update = Choice.objects.get(pk=int(id))
@@ -55,6 +55,7 @@ def ChoicesFormView(request):
         return redirect(reverse("polls:new_question"))
 
 def NewChoice(request):
+    print(f"Body: {list(request.POST)}")
     question = Question.objects.get(pk=request.POST["question_id"])
     new_choice = Choice.objects.create(question=question)
     context = {
@@ -63,8 +64,8 @@ def NewChoice(request):
     return render(request, "polls/snippets/choice_input.html", context)
 
 def DeleteChoice(request):
-    Choice.objects.get(id=id).delete()
-    return 
+    Choice.objects.get(id=request.POST["choice_id"]).delete()
+    return HttpResponse(status=200)
 
 class ResultsView(generic.DetailView):
     model = Question
